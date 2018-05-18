@@ -73,7 +73,7 @@ if ( cluster.isMaster ) {
 
     // Start application
     app.listen( config.port, () => {
-      logger.log( `Express running, now listening on port ${config.port}` );
+      logger.log( `Worker ${process.pid} started, express running on port ${config.port}` );
     } );
   } );
 }
