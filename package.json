@@ -1,0 +1,27 @@
+{
+  "name": "node-clustering",
+  "version": "1.0.0",
+  "description": "Testing working with node cluster module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanbechtol/node-clustering.git"
+  },
+  "author": "Evan Bechtol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evanbechtol/node-clustering/issues"
+  },
+  "homepage": "https://github.com/evanbechtol/node-clustering#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "mongoose": "^4.12.0",
+    "morgan": "^1.9.0",
+    "rotating-file-stream": "^1.3.2"
+  }
+}
