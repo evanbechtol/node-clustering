@@ -1,5 +1,6 @@
-# Bare Express Web Server
-A basic scaffold/skeleton to create a Node.JS Express server.
+# Node Clustering Example
+A basic implementation of a node service, creating an Express web server with clustering. A single instance of Node.js runs in a single thread. To take advantage of multi-core systems, the user will sometimes want to launch a cluster of Node.js processes to handle the load.
+For more infromation and documentation on the Node Cluster module, see: [cluster module documentation](https://nodejs.org/api/cluster.html#cluster_how_it_works)
 
 ### Contributing
 If you wish to contribute to this repository, please feel free to clone/fork.
