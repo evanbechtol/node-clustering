@@ -20,8 +20,8 @@ if ( cluster.isMaster ) {
   const logger = require( "./services/Logger" );
 
   const mongooseOptions = {
-    useMongoClient: true,
-    autoReconnect: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   };
 
   mongoose.Promise = global.Promise;
