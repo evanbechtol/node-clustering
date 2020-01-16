@@ -1,7 +1,5 @@
-const mongoose = require( 'mongoose' );
+const mongoose = require( "mongoose" );
 
-let schema = mongoose.Schema( {
+let schema = mongoose.Schema( {} );
 
-} );
-
-module.exports = mongoose.model( 'MyModel', schema );
+module.exports = mongoose.model( "MyModel", schema );
