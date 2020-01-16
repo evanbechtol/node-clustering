@@ -6,6 +6,7 @@ If you wish to contribute to this repository, please feel free to clone/fork.
 Issue Pull Requests or open issues for any changes that you make.
 
 ### Functionality
+* Service-based architecture
 * HTTP(S) Request Logging
 * Rotating log system
 * Enforcement of HTTPS usage in production environments
@@ -23,7 +24,6 @@ a simple "scaffold" express server. The other branches will contain additional f
 
 ### Setup
 - Simply clone the repo
-```git clone https://github.com/Parasin/bare-express.git```
 
 - Install the dependencies 
    - Install [Node.JS](https://nodejs.org/en/)
@@ -43,21 +43,40 @@ a simple "scaffold" express server. The other branches will contain additional f
 
 ```
 //FILE: routes/index.js
-const user = require( './user' );
+const routesTemplate = require( "./routes-template" );
+const userRoutes = require( "./user" ); // Import your routes
 
-// WON'T ENFORCE HTTPS
-  if ( config.env === 'development' ) {
-     app.use( '/user', user );
-  }
+let routes = ( app ) => {
+  app.use( ( req, res, next ) => {
+    res.setHeader( "Access-Control-Allow-Origin", "*" );
+    res.setHeader( "Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE" );
+    res.setHeader( "Access-Control-Allow-Headers", "X-Requested-With,content-type, x-access-token", "authorization" );
+    res.setHeader( "Access-Control-Allow-Credentials", true );
+    res.removeHeader( "X-Powered-By" );
+    next();
+  } );
 
-  // WILL ENFORCE HTTPS
-  else {
-     app.use( '/user', user );
-  }
+  app.use( "/", routesTemplate );
+  app.use( "/user", userRoutes ); // Add your routes like this
+};
+
+module.exports = routes;
+
 ```
 
-- Create the models required for your database, in the models directory.  
-- Create controllers to handle, and modularize complex operations.
+### Application Structure
+ - #### Config
+     - Contains all application configurations parameters
+ - #### Controllers
+     - Handles calling of services that implement business logic, and responding to client requests. *Business logic should never be placed in a controller, always in a service!* 
+ - #### Loaders
+     - Loaders are responsible for bringing specific frameworks/modules into the application. This is neither business logic, nor does it handle requests explicitly.
+ - #### Models
+     - Models define the collection structure and allow for validation of data.
+ - #### Routes
+     - Routes define the REST interface and the API structure
+ - #### Services
+     - The services directory holds all services. These are intended to encapsulate and contain all business logic. This makes testing business logic much easier, and it is able to be re-used where needed
  
 ### Starting 
 * Run the command ```npm test``` to run the application in "development" mode.
